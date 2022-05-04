@@ -27,13 +27,13 @@ jobs:
 workflows:
   tdt:
     jobs:
-      - build:
+      - build: 
         filters:
           branch:
-            only: 
-              - master
+            only:
+              main
       - test:
         filters:
           branch:
-            only: 
-              - master
+            only:
+              main
