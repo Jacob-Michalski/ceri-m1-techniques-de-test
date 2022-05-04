@@ -10,7 +10,6 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - codecov/upload
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -19,7 +18,6 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - codecov/upload
       - run:
           name: Test
           command: mvn clean test
