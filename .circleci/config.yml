@@ -27,13 +27,5 @@ jobs:
 workflows:
   tdt:
     jobs:
-      - build: 
-        filters:
-          branch:
-            only:
-              main
-      - test:
-        filters:
-          branch:
-            only:
-              main
+      - build
+      - test
