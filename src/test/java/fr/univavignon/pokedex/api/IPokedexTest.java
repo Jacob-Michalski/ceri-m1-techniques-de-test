@@ -44,6 +44,7 @@ class IPokedexTest {
     void getPokemon() {
         Mockito.when(pikachu.getHp()).thenReturn(42);
         int pokid = pokedex.addPokemon(pikachu);
+        assert(pokid != 0);
         assertDoesNotThrow(() -> {
             assert(pokedex.getPokemon(pokid).getHp() == 42);
         });
@@ -53,6 +54,7 @@ class IPokedexTest {
     void getPokemons() {
         List<Pokemon> discovered = pokedex.getPokemons();
         int discoveredNb = pokedex.size();
+        assert(discovered != null);
         assertDoesNotThrow(() -> {
             assert(discovered.size() == discoveredNb);
         });
@@ -64,6 +66,7 @@ class IPokedexTest {
         pokedex.addPokemon(pikachu);
         pokedex.addPokemon(bulbizzare);
         List<Pokemon> sorted = pokedex.getPokemons(order);
+        assert(sorted != null);
         assert(sorted.get(0) == pikachu);
     }
 }
