@@ -5,37 +5,25 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
+  build-and-test:
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/openjdk:18.0.1
     steps:
       - checkout
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
-  test:
-    docker:
-      - image: cimg/openjdk:11.0
-    steps:
-      - checkout
       - run:
           name: Test
-          command: mvn test
+          command: mvn clean test
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   tdt:
     jobs:
-      - build:
+      - build-and-test:
           filters:
             branches:
               only:
-                - main
-      - test:
-          filters:
-            branches:
-              only:
-                - main
-      - build
-      - test
+                - master
