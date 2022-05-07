@@ -1,13 +1,13 @@
 package fr.univavignon.pokedex.api;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PokemonMetadataTest {
 
     PokemonMetadata bulbizzare;
 
-    @Before
+    @BeforeEach
     public void setup() {
         bulbizzare = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
     }
