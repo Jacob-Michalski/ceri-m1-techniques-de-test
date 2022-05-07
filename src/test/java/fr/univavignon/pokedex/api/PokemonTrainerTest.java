@@ -1,7 +1,7 @@
 package fr.univavignon.pokedex.api;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.BeforeClass;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,8 +9,8 @@ class PokemonTrainerTest {
 
     PokemonTrainer sacha;
 
-    @BeforeClass
-    void setup() {
+    @Before
+    public void setup() {
         sacha = new PokemonTrainer("Sacha", Team.INSTINCT, new Pokedex());
     }
 

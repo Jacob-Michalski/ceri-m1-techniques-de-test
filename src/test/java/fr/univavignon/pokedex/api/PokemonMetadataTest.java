@@ -1,16 +1,14 @@
 package fr.univavignon.pokedex.api;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.BeforeClass;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PokemonMetadataTest {
 
     PokemonMetadata bulbizzare;
 
-    @BeforeClass
-    void setup() {
+    @Before
+    public void setup() {
         bulbizzare = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
     }
 
