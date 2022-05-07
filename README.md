@@ -34,4 +34,10 @@ Le rendu des TPs se fait au rythme suivant :
 
 Pour chaque rendu, le projet dans son intégralité doit être déposé sur la plateforme.
 
-[^1]: Si vous n’êtes vraiment pas à l’aise avec cet outil nous vous conseillons quand même vivement de vous y mettre.
+## Badges
+
+[![Dev](https://badgen.net/badge/dev/jacob%20michalski/orange)](https://github.com/Jacob-Michalski)
+![Groupe](https://badgen.net/badge/groupe/alternants/purple)
+
+[![CircleCI](https://circleci.com/gh/Jacob-Michalski/ceri-m1-techniques-de-test.svg?style=shield)](https://app.circleci.com/pipelines/github/Jacob-Michalski)
+![Codecov](https://img.shields.io/codecov/c/github/Jacob-Michalski/ceri-m1-techniques-de-test)
