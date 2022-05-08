@@ -8,8 +8,8 @@ class PokemonMetadataTest {
     PokemonMetadata bulbizzare;
 
     @BeforeEach
-    public void setup() {
-        bulbizzare = new PokemonMetadata(0, "Bulbizarre", 126, 126, 90);
+    public void setup() throws PokedexException {
+        bulbizzare = PokemonMetadataProvider.getPokemonMetadataProvider().getPokemonMetadata(0);
     }
 
     @Test
@@ -19,7 +19,7 @@ class PokemonMetadataTest {
 
     @Test
     void getName() {
-        assert(bulbizzare.getName().equals("bulbizzare"));
+        assert(bulbizzare.getName().equals("Bulbizzare"));
     }
 
     @Test

@@ -13,19 +13,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class IPokedexTest {
 
     @Mock
-    Pokemon pikachu;
+    IPokemonMetadataProvider metadataProvider;
 
     @Mock
-    Pokemon bulbizzare;
+    IPokemonFactory pokemonFactory;
 
-    @Mock
-    Comparator<Pokemon> order;
+    Comparator<Pokemon> order = PokemonComparators.NAME;
 
     IPokedex pokedex;
 
+    Pokemon bulbizzare;
+
+    Pokemon aquali;
+
     @BeforeEach
     void setup() {
-        pokedex = new Pokedex();
+        pokedex = new Pokedex(metadataProvider, pokemonFactory);
+        IPokemonFactory factory = new PokemonFactory();
+        bulbizzare = factory.createPokemon(0, 613, 64, 4000, 4);
+        aquali = factory.createPokemon(133, 2729, 202, 5000, 4);
     }
 
     @Test
@@ -36,17 +42,16 @@ class IPokedexTest {
     @Test
     void addPokemon() {
         int discoveredNb = pokedex.size();
-        pokedex.addPokemon(pikachu);
+        pokedex.addPokemon(bulbizzare);
         assert(pokedex.size() == discoveredNb+1);
     }
 
     @Test
     void getPokemon() {
-        Mockito.when(pikachu.getHp()).thenReturn(42);
-        int pokid = pokedex.addPokemon(pikachu);
-        assert(pokid != 0);
+        int pokid = pokedex.addPokemon(bulbizzare);
+        assert(pokid == 0);
         assertDoesNotThrow(() -> {
-            assert(pokedex.getPokemon(pokid).getHp() == 42);
+            assert(pokedex.getPokemon(pokid).getHp() == 64);
         });
     }
 
@@ -61,12 +66,11 @@ class IPokedexTest {
     }
 
     @Test
-    void getPokemonsWithArgument() {
-        Mockito.when(order.compare(pikachu, bulbizzare)).thenReturn(1);
-        pokedex.addPokemon(pikachu);
+    void getPokemonsOrdered() {
         pokedex.addPokemon(bulbizzare);
+        pokedex.addPokemon(aquali);
         List<Pokemon> sorted = pokedex.getPokemons(order);
         assert(sorted != null);
-        assert(sorted.get(0) == pikachu);
+        assert(sorted.get(0) == aquali);
     }
 }
