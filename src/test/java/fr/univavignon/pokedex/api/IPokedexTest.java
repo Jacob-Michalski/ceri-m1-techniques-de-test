@@ -12,10 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IPokedexTest {
 
-    @Mock
-    IPokemonMetadataProvider metadataProvider;
-
-    @Mock
     IPokemonFactory pokemonFactory;
 
     Comparator<Pokemon> order = PokemonComparators.NAME;
@@ -28,10 +24,10 @@ class IPokedexTest {
 
     @BeforeEach
     void setup() {
-        pokedex = new Pokedex(metadataProvider, pokemonFactory);
-        IPokemonFactory factory = new PokemonFactory();
-        bulbizzare = factory.createPokemon(0, 613, 64, 4000, 4);
-        aquali = factory.createPokemon(133, 2729, 202, 5000, 4);
+        pokemonFactory = new PokemonFactory();
+        pokedex = new Pokedex(PokemonMetadataProvider.getPokemonMetadataProvider(), pokemonFactory);
+        bulbizzare = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        aquali = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
     }
 
     @Test
@@ -72,5 +68,25 @@ class IPokedexTest {
         List<Pokemon> sorted = pokedex.getPokemons(order);
         assert(sorted != null);
         assert(sorted.get(0) == aquali);
+    }
+
+    @Test
+    void createPokemon() {
+        assert(pokedex.createPokemon(0, 613, 64, 4000, 4).getIndex() == 0);
+        assert(pokedex.createPokemon(133, 2729, 202, 5000, 4).getIndex() == 133);
+        assert(pokedex.createPokemon(-1, 613, 64, 4000, 4) == null);
+        assert(pokedex.createPokemon(151, 613, 64, 4000, 4) == null);
+    }
+
+    @Test
+    void getPokemonMetadata() {
+        assertDoesNotThrow(() -> {
+            assert(pokedex.getPokemonMetadata(0).getIndex() == 0);
+            assert(pokedex.getPokemonMetadata(133).getIndex() == 133);
+        });
+        assertThrows(PokedexException.class, () -> {
+            pokedex.getPokemonMetadata(-1);
+            pokedex.getPokemonMetadata(151);
+        });
     }
 }
