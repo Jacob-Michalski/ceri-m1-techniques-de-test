@@ -25,7 +25,7 @@ jobs:
       - codecov/upload:
           file: /target/site/jacoco/jacoco.xml
       - run:
-          name: Javadoc
+          name: documentation
           command: mvn javadoc:javadoc
             # upload build details
             - store_artifacts:
