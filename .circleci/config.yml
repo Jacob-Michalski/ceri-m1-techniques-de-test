@@ -17,6 +17,12 @@ jobs:
           name: Checkstyle
           command: mvn checkstyle:checkstyle
       - run:
+          name: Documentation
+          command: mvn javadoc:javadoc
+            - store_artifacts:
+                path: target/site
+                destination: docs
+      - run:
           name: Build
           command: mvn -B -DskipTests clean package
       - run:
@@ -24,13 +30,7 @@ jobs:
           command: mvn test
       - codecov/upload:
           file: /target/site/jacoco/jacoco.xml
-      - run:
-          name: documentation
-          command: mvn javadoc:javadoc
-            # upload build details
-            - store_artifacts:
-                path: target/site
-                destination: docs
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
