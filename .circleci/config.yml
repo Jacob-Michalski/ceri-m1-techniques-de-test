@@ -52,7 +52,7 @@ jobs:
             git config user.name "Jacob-Michalski"
       - add_ssh_keys:
           fingerprints:
-            - "00:f8:a2:a4:32:e6:14:c2:f2:c2:36:18:38:f0:fe:89"
+            - "33:04:f8:40:75:55:ce:83:32:7c:dd:f1:9d:bd:45:60"
       - run:
           name: Deploy docs to gh-pages branch
           command: gh-pages --dotfiles --message "[skip ci] Updates" --dist target/site/apidocs
