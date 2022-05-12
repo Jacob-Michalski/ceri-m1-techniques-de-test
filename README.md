@@ -41,3 +41,4 @@ Pour chaque rendu, le projet dans son intégralité doit être déposé sur la p
 
 [![CircleCI](https://circleci.com/gh/Jacob-Michalski/ceri-m1-techniques-de-test.svg?style=shield)](https://app.circleci.com/pipelines/github/Jacob-Michalski)
 ![Codecov](https://img.shields.io/codecov/c/github/Jacob-Michalski/ceri-m1-techniques-de-test)
+![Codecov](target/site/badges/checkstyle-result.svg)
