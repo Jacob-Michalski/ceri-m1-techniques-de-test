@@ -56,6 +56,10 @@ workflows:
       - build-and-test:
           filters:
             branches:
-              only:
-                - master
-      - docs-deploy
+              only: master
+      - docs-deploy:
+          requires:
+            - build-and-test
+            filters:
+              branches:
+                only: master
