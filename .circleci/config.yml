@@ -60,12 +60,12 @@ workflows:
   tdt:
     jobs:
       - build-and-test:
-          requires:
-            - build-and-test
           filters:
             branches:
               only: master
       - documentation:
+          requires:
+            - build-and-test
           filters:
             branches:
               only: master
