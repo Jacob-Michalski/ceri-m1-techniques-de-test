@@ -8,7 +8,7 @@ orbs:
 # Define a job to be invoked later in a workflow
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build-and-test:
+  build:
     docker:
       - image: cimg/openjdk:17.0.3
     steps:
@@ -25,6 +25,17 @@ jobs:
       - codecov/upload:
           file: /target/site/jacoco/jacoco.xml
 
+  test:
+    docker:
+      - image: cimg/openjdk:17.0.3
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: mvn test
+      - codecov/upload:
+          file: /target/site/jacoco/jacoco.xml
+
   documentation:
     docker:
       - image: cimg/openjdk:17.0.3
@@ -34,7 +45,7 @@ jobs:
           name: Documentation
           command: mvn javadoc:javadoc
       - store_artifacts:
-          path: target/site/apidocs
+          path: target/site
           destination: docs
       - persist_to_workspace:
           root: target/site
@@ -66,13 +77,17 @@ jobs:
 workflows:
   tdt:
     jobs:
-      - build-and-test:
+      - build:
+          filters:
+            branches:
+              only: master
+      - test:
           filters:
             branches:
               only: master
       - documentation:
           requires:
-            - build-and-test
+            - build
           filters:
             branches:
               only: master
