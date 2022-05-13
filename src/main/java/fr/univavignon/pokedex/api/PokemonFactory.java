@@ -9,9 +9,9 @@ public class PokemonFactory implements IPokemonFactory {
         try {
             PokemonMetadata pokemonMetadata = PokemonMetadataProvider.getPokemonMetadataProvider().getPokemonMetadata(index);
             double iv = Math.random();
-            int att = (int) (pokemonMetadata.getAttack()+pokemonMetadata.getAttack()*iv);
-            int def = (int) (pokemonMetadata.getDefense()+pokemonMetadata.getDefense()*iv);
-            int sta = (int) (pokemonMetadata.getStamina()+pokemonMetadata.getStamina()*iv);
+            int att = (int) (pokemonMetadata.getAttack()+15*iv);
+            int def = (int) (pokemonMetadata.getDefense()+15*iv);
+            int sta = (int) (pokemonMetadata.getStamina()+15*iv);
             return new Pokemon(index, pokemonMetadata.getName(), att , def,
                     sta, cp, hp, dust, candy, iv);
         }
