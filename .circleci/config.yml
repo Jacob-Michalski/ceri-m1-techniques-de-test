@@ -33,9 +33,13 @@ jobs:
       - run:
           name: Documentation
           command: mvn javadoc:javadoc
+      - store_artifacts:
+          path: target/site/apidocs
+          destination: docs
       - persist_to_workspace:
           root: target/site
-          paths: apidocs
+          paths:
+            - apidocs
 
   docs-deploy:
     docker:
